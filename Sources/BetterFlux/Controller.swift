@@ -19,7 +19,14 @@ final class Controller: ObservableObject {
 
     private let defaults = UserDefaults.standard
 
-    @Published var mode: WarmthMode { didSet { save(mode.rawValue, "mode"); apply() } }
+    @Published var mode: WarmthMode {
+        didSet {
+            save(mode.rawValue, "mode")
+            // Off means a normal screen, so undo any dimming too.
+            if mode == .off { brightness = 1 }
+            apply()
+        }
+    }
     @Published var dayTemp: Double { didSet { save(dayTemp, "dayTemp"); apply() } }
     @Published var nightTemp: Double { didSet { save(nightTemp, "nightTemp"); apply() } }
     /// Minutes after midnight when the evening warm-up starts.
