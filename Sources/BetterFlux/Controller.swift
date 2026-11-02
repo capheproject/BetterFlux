@@ -121,6 +121,7 @@ final class Controller: ObservableObject {
     }
 
     func nudgeBrightness(_ delta: Double) {
+        guard mode != .off else { return }
         brightness = min(1, max(Self.minBrightness, (brightness + delta * 100).rounded() / 100))
     }
 

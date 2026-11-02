@@ -29,6 +29,7 @@ struct MenuView: View {
                 Slider(value: $c.brightness, in: Controller.minBrightness...1)
                 Image(systemName: "sun.max").foregroundStyle(.secondary).frame(width: 18)
             }
+            .disabled(c.mode == .off)
 
             HStack {
                 Button("Settings…") {
